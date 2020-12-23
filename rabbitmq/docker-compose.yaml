@@ -1,0 +1,23 @@
+version: '2.3'
+services:
+  rabbitmq:
+    container_name: RabbitMQ
+    image: rabbitmq:3-management-alpine
+    volumes:
+      - mq_data:/var/lib/rabbitmq/mnesia
+    ports:
+      - "15672:15672"
+      - "5672:5672" 
+    networks:
+      - log
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+      RABBITMQ_DEFAULT_VHOST: Swiss
+
+volumes:
+  mq_data:
+
+networks:
+  log:
+    driver: bridge
